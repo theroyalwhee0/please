@@ -1,5 +1,5 @@
 /**
- * iterableSpec.js
+ * test/iterableSpec.js
  */
 'use strict';
 

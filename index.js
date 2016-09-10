@@ -1,5 +1,5 @@
 /**
- * please.js
+ * index.js
  */
 'use strict';
 

@@ -1,5 +1,5 @@
 /**
- * pleaseSpec.js
+ * test/pleaseSpec.js
  */
 'use strict';
 

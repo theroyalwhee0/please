@@ -1,5 +1,5 @@
 /**
- * findSpect.js
+ * test/findSpec.js
  */
 'use strict';
 

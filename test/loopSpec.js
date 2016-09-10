@@ -1,5 +1,5 @@
 /**
- * loopsSpec.js
+ * test/loopSpec.js
  */
 'use strict';
 

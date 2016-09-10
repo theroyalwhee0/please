@@ -1,5 +1,5 @@
 /**
- * isSpec.js
+ * test/isSpec.js
  */
 'use strict';
 
