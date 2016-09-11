@@ -7,7 +7,8 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "mocha ${npm_package_config_testpath}",
-    "test-watch": "mocha ${npm_package_config_testpath} --bail --watch --reporter dot"
+    "test-watch": "mocha ${npm_package_config_testpath} --bail --watch --reporter dot",
+		"gen-docs": "jsdoc index.js --destination docs"
   },
   "config": {
     "testpath": "test/**/*Spec.js"
@@ -18,17 +19,18 @@
   "directories": {
     "test": "test"
   },
-	"homepage": "https://github.com/theroyalwhee0/please#readme",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/theroyalwhee0/please.git"
-	},
-	"bugs": {
-		"url": "https://github.com/theroyalwhee0/please/issues"
-	},
+  "homepage": "https://github.com/theroyalwhee0/please#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theroyalwhee0/please.git"
+  },
+  "bugs": {
+    "url": "https://github.com/theroyalwhee0/please/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "expect.js": "^0.3.1",
+    "jsdoc": "^3.4.1",
     "mocha": "^3.0.2"
   }
 }
