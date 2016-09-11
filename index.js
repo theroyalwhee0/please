@@ -128,9 +128,12 @@ function _while(initial, condition, action) {
 };
 
 /**
- * Find an entry.
+ * The find method returns a value in the collection, if an element in
+ * the collection satisfies the provided testing function. Otherwise undefined is returned.
+ * Similar to Array.find.
+ * REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
  * @param  {Iterable} collection      Collection to search.
- * @param  {Function} condition Condition test, if returns true then match is made and stop.
+ * @param  {Function} condition Condition test function. Should return true if match, otherwise false.
  * @return {Promise}           Resolves when found or end of collection is reached.
  */
 function find(collection, condition) {
@@ -184,7 +187,7 @@ function iterable(collection) {
 			length,
 			collection,
 			// Item.
-			value, key,
+			key, value,
 			idx: idx++
 		};
 	}
@@ -200,7 +203,7 @@ module.exports = {
 	version,
 	// Iteration.
 	iterable,
-	// Is type helpers.
+	// Is-type helpers.
 	isFunction, isPromise,
 	// Looping.
 	while: _while,
