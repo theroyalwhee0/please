@@ -23,6 +23,11 @@ describe('Please', () => {
 			const result = Please.isPromise(promise);
 			expect(result).to.be(true);
 		});
+		it('should be true for rejected promises', () => {
+			const promise = Promise.reject(new Error('Boom!'));
+			const result = Please.isPromise(promise);
+			expect(result).to.be(true);
+		});
 		it('should be false for undefined', () => {
 			const result = Please.isPromise();
 			expect(result).to.be(false);

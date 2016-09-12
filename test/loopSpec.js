@@ -14,7 +14,7 @@ const Please = require('../index')
  */
 function delay(time) {
 	return new Promise(resolve => {
-		global.setTimeout(resolve, time || 2);
+		global.setTimeout(resolve, time || 10);
 	});
 }
 function count(list, match) {
@@ -130,17 +130,17 @@ describe('Please', () => {
 		it('should handle asynchronous results from each function', () => {
 			const called = [];
 			return Please.while(() => {
-					return delay().then(() => {
+					return delay(2).then(() => {
 						called.push('initial');
 						return 12;
 					});
 				}, (value, idx) => {
-					return delay().then(() => {
+					return delay(2).then(() => {
 						called.push('condition');
 						return value > 0;
 					});
 				}, (value, idx) => {
-					return delay().then(() => {
+					return delay(2).then(() => {
 						called.push('action');
 						return --value;
 					});
@@ -175,6 +175,121 @@ describe('Please', () => {
 				.catch(err => {
 					expect(err).to.be.an(Error);
 					expect(err.message).to.be('Pow!');
+				});
+		});
+	});
+	describe('forEach', () => {
+		it('should be a function', () => {
+			expect(Please.forEach).to.be.a('function');
+			expect(Please.forEach.length).to.be(2);
+		});
+		it('should iterate over each item in an array', () => {
+			const collection = [ 1, 2, 4, 6 ];
+			const results = [ ];
+			return Please.forEach(collection, (value, idx) => {
+				const result = value*value;
+				results.push(result);
+				return Promise.resolve(result);
+			}).then(value => {
+				expect(value).to.be(undefined);
+				expect(results.length).to.be(4);
+				expect(results[0]).to.be(1);
+				expect(results[1]).to.be(4);
+				expect(results[2]).to.be(16);
+				expect(results[3]).to.be(36);
+			});
+		});
+		it('should iterate over each item in an object', () => {
+			const collection = { a: 2, b: 4, c: 6, d: 8 };
+			const results = [ ];
+			return Please.forEach(collection, (value, key) => {
+				const result = value*value;
+				results[key] = result;
+				return Promise.resolve(result);
+			}).then(value => {
+				expect(value).to.be(undefined);
+				expect(Object.keys(results).length).to.be(4);
+				expect(results.a).to.be(4);
+				expect(results.b).to.be(16);
+				expect(results.c).to.be(36);
+				expect(results.d).to.be(64);
+			});
+		});
+		it('should halt on rejection', () => {
+			const collection = [ 1, 2, 4, 6 ];
+			const results = [ ];
+			return Please.forEach(collection, (value, idx) => {
+				const result = value*value;
+				results.push(result);
+				if(value === 2) {
+					return Promise.reject(new Error('Boom!'));
+				}
+				return Promise.resolve(result);
+			}).then(() => {
+				expect().fail('Should have rejected.');
+			}, err => {
+				expect(err).to.be.an(Error);
+				expect(err.message).to.be('Boom!');
+				expect(Object.keys(results).length).to.be(2);
+				expect(results[0]).to.be(1);
+				expect(results[1]).to.be(4);
+				expect(results[2]).to.be(undefined);
+			});
+		});
+	});
+	describe('callEach', () => {
+		it('should be a function', () => {
+			expect(Please.callEach).to.be.a('function');
+			expect(Please.callEach.length).to.be(1);
+		});
+		it('should iterate over each function in an array', () => {
+			const collection = [
+				() => { return 1; },
+				2,
+				() => { return Promise.resolve(4); },
+				Promise.resolve(6)
+			];
+			return Please.callEach(collection)
+				.then(results => {
+					expect(results).to.be.an('array');
+					expect(results.length).to.be(4);
+					expect(results[0]).to.be(1);
+					expect(results[1]).to.be(2);
+					expect(results[2]).to.be(4);
+					expect(results[3]).to.be(6);
+				});
+		});
+		it('should iterate over each function in an object', () => {
+			const collection = {
+				a: () => { return 5; },
+				b: 4,
+				c: () => { return Promise.resolve(3); },
+				d: Promise.resolve(2)
+			};
+			return Please.callEach(collection)
+				.then(results => {
+					expect(results).to.be.an('array');
+					expect(results.length).to.be(4);
+					expect(results[0]).to.be(5);
+					expect(results[1]).to.be(4);
+					expect(results[2]).to.be(3);
+					expect(results[3]).to.be(2);
+				});
+		});
+		it('should halt on rejection', () => {
+			let called = 0;
+			const collection = [
+				() => { called++; return 100; },
+				() => { called++; return Promise.reject(new Error('Boom!')); },
+				() => { called++; return 200; }
+			];
+			return Please.callEach(collection)
+				.then(() => {
+					expect().fail('Should have rejected.');
+				}, err => {
+					expect(err).to.be.an(Error);
+					expect(err.message).to.be('Boom!');
+					expect(called).to.be(2);
 				});
 		});
 	});

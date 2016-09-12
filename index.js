@@ -18,6 +18,7 @@ const STOP = { '<sym>': 'stop' };
 
 /**
  * Is value a function?
+ * @private
  * @param  {any}  value Type to check.
  * @return {boolean}       True if function, false otherwise.
  */
@@ -40,6 +41,41 @@ function isPromise(value) {
 				&& typeof value.catch === 'function'
 			)
 		);
+}
+
+/**
+ * Return a function that returns the next item in a collection each call.
+ * @param  {Object|Array} collection The collection to iterate over.
+ * @return {Object|undefined}            Object containing next item or undefined if done.
+ */
+function iterable(collection) {
+	let idx = 0;
+	let keys;
+	let length;
+	if(Array.isArray(collection)) {
+		length = collection.length;
+	} else if (collection && typeof collection === 'object') {
+		keys = Object.keys(collection);
+		length = keys.length;
+	} else {
+		const msg = (''+collection).substring(0,20);
+		throw new Error(`Can not iterate over "${msg}" (${typeof collection})`);
+	}
+	return function iterable_() {
+		if(idx >= length) {
+			return undefined;
+		}
+		const key =  keys ? keys[idx] : idx;
+		const value = keys ? collection[key] : collection[idx];
+		return {
+			// Collection.
+			length,
+			collection,
+			// Item.
+			key, value,
+			idx: idx++
+		};
+	}
 }
 
 /**
@@ -159,38 +195,56 @@ function find(collection, condition) {
 }
 
 /**
- * Return a function that returns the next item in a collection each call.
- * @param  {Object|Array} collection The collection to iterate over.
- * @return {Object|undefined}            Object containing next item or undefined if done.
+ * The forEach() method executes a provided function once per array element.
+ * Similar to Array.forEach.
+ * REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+ * @param  {Array|Object} collection      Collection to loop over.
+ * @param  {function} action    Action to execute.
+ * @return {Promise}           Resolves when end of collection is reached.
  */
-function iterable(collection) {
-	let idx = 0;
-	let keys;
-	let length;
-	if(Array.isArray(collection)) {
-		length = collection.length;
-	} else if (collection && typeof collection === 'object') {
-		keys = Object.keys(collection);
-		length = keys.length;
-	} else {
-		const msg = (''+collection).substring(0,20);
-		throw new Error(`Can not iterate over "${msg}" (${typeof collection})`)
-	}
-	return function iterable_() {
-		if(idx >= length) {
+function forEach(collection, action) {
+	const next = iterable(collection);
+	return _while(undefined, item => {
+			return item !== STOP;
+		}, () => {
+			const item = next();
+			if(item === undefined) {
+				return STOP;
+			}
+			return Promise.resolve(action(item.value, item.key));
+		}).then(() => {
 			return undefined;
-		}
-		const key =  keys ? keys[idx] : idx;
-		const value = keys ? collection[key] : collection[idx];
-		return {
-			// Collection.
-			length,
-			collection,
-			// Item.
-			key, value,
-			idx: idx++
-		};
-	}
+		});
+}
+
+/**
+ * The callEach() calls each function in an array and resolves any values
+ * returned. Items that are not functions are resolved.
+ * @param  {Array|Object} collection      Collection to loop over.
+ * @return {Promise}           Resolves when end of collection is reached.
+ * Resolves to an array containing the results of each resolved item.
+ */
+function callEach(collection) {
+	const next = iterable(collection);
+	const results = [ ];
+	return _while(undefined, item => {
+			return item !== STOP;
+		}, () => {
+			const item = next();
+			if(item === undefined) {
+				return STOP;
+			}
+			const value = isFunction(item.value)
+				? item.value()
+				: item.value;
+			return Promise.resolve(value)
+				.then(value => {
+					results.push(value);
+					return value;
+				});
+		}).then(() => {
+			return results;
+		})
 }
 
 /* Exports. */
@@ -200,8 +254,10 @@ module.exports = {
 	// Iteration.
 	iterable,
 	// Is-type helpers.
-	isFunction, isPromise,
+	isPromise,
 	// Looping.
+	forEach,
+	callEach,
 	while: _while,
 	do: _do,
 	// Finding.

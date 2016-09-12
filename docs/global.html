@@ -101,6 +101,164 @@
 
     
 
+    <h4 class="name" id="callEach"><span class="type-signature"></span>callEach<span class="signature">(collection)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+<div class="description">
+    The callEach() calls each function in an array and resolves any values
+returned. Items that are not functions are resolved.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>collection</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Collection to loop over.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line227">line 227</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Resolves when end of collection is reached.
+Resolves to an array containing the results of each resolved item.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="do"><span class="type-signature"></span>do<span class="signature">(initial, condition, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
@@ -248,7 +406,7 @@ Like a do { } while() loop. The condition is evaluated after the loop.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line45">line 45</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -430,7 +588,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line139">line 139</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line175">line 175</a>
     </li></ul></dd>
     
 
@@ -483,14 +641,16 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
     
 
-    <h4 class="name" id="isFunction"><span class="type-signature"></span>isFunction<span class="signature">(value)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="forEach"><span class="type-signature"></span>forEach<span class="signature">(collection, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
 
 
 <div class="description">
-    Is value a function?
+    The forEach() method executes a provided function once per array element.
+Similar to Array.forEach.
+REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 </div>
 
 
@@ -526,13 +686,16 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>collection</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">any</span>
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Object</span>
 
 
             
@@ -542,7 +705,30 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
             
 
-            <td class="description last">Type to check.</td>
+            <td class="description last">Collection to loop over.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>action</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Action to execute.</td>
         </tr>
 
     
@@ -583,7 +769,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line24">line 24</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line205">line 205</a>
     </li></ul></dd>
     
 
@@ -610,7 +796,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
         
 <div class="param-desc">
-    True if function, false otherwise.
+    Resolves when end of collection is reached.
 </div>
 
 
@@ -621,7 +807,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     </dt>
     <dd>
         
-<span class="param-type">boolean</span>
+<span class="param-type">Promise</span>
 
 
     </dd>
@@ -736,7 +922,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line33">line 33</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -892,7 +1078,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line166">line 166</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -1095,7 +1281,7 @@ Like a while() { } loop. The condition is evaluated before the loop.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line80">line 80</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line116">line 116</a>
     </li></ul></dd>
     
 
@@ -1159,13 +1345,13 @@ Like a while() { } loop. The condition is evaluated before the loop.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#do">do</a></li><li><a href="global.html#find">find</a></li><li><a href="global.html#isFunction">isFunction</a></li><li><a href="global.html#isPromise">isPromise</a></li><li><a href="global.html#iterable">iterable</a></li><li><a href="global.html#while">while</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#callEach">callEach</a></li><li><a href="global.html#do">do</a></li><li><a href="global.html#find">find</a></li><li><a href="global.html#forEach">forEach</a></li><li><a href="global.html#isPromise">isPromise</a></li><li><a href="global.html#iterable">iterable</a></li><li><a href="global.html#while">while</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Sat Sep 10 2016 21:08:03 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Mon Sep 12 2016 17:56:48 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
