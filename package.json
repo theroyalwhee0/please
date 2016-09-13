@@ -1,6 +1,6 @@
 {
   "name": "@theroyalwhee0/please",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Promise Helper Library.",
   "main": "index.js",
   "author": "Adam Mill <theroyalwhee0@gmail.com>",

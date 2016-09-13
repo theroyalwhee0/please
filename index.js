@@ -1,6 +1,6 @@
 /**
  * @file Please, A Promise Helper Library.
- * @version 0.0.1
+ * @version 0.0.2
  * @author Adam Mill
  * @copyright Copyright 2016 Adam Mill
  * @license Apache-2.0
@@ -34,7 +34,7 @@ const Please = { };
  * The version of the library.
  * @type {string}
  */
-Please.version = '0.0.1';
+Please.version = '0.0.2';
 
 /**
  * Return a function that returns the next item in a collection each call.
