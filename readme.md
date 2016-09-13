@@ -1,5 +1,5 @@
-# Please, A Promise Helper Library.
-'Please' is a Javascript Promise helper library. It is meant to be used along side [native Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or libraries like [bluebird](http://bluebirdjs.com/).
+# Please, A Promise Helper Library
+'Please' is a Javascript Promise helper library. It is meant to be used alongside [native Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) or libraries like [bluebird](http://bluebirdjs.com/).
 
 It has functions to simplify dealing with Promise containing collections, looping over Promises till a condition is met, and other miscellaneous functions.
 
@@ -18,7 +18,7 @@ At the moment, the only examples are the [tests](https://github.com/theroyalwhee
 - npm test
 - npm run test-watch
 
-# Legal & Licence
+# Legal & License
 Copyright 2016 Adam Mill
 
-The library is released under Apache 2 licence.  See LICENCE for more details.
+The library is released under Apache 2 license.  See LICENSE for more details.
