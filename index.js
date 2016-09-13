@@ -7,13 +7,11 @@
  */
 'use strict';
 
-/* Imports. */
-const pkg = require('./package.json');
-
-/* Constants. */
-const version = pkg.version;
-
-/* Symbols. */
+/**
+ * Stop symbol. Used to indicate stopping iteration.
+ * @private
+ * @type {Object}
+ */
 const STOP = { '<sym>': 'stop' };
 
 /**
@@ -27,28 +25,23 @@ function isFunction(value) {
 }
 
 /**
- * Is the value a promise?
- * @param  {any}  value The value to check.
- * @return {boolean}       True if promise, false if not.
+ * The Please namespace.
+ * @namespace Please
  */
-function isPromise(value) {
-	return !!(
-			value instanceof Promise	// Instance check.
-			|| ( 											// Ducktype.
-				value
-				&& typeof value === 'object'
-				&& typeof value.then === 'function'
-				&& typeof value.catch === 'function'
-			)
-		);
-}
+const Please = { };
+
+/**
+ * The version of the library.
+ * @type {string}
+ */
+Please.version = '0.0.1';
 
 /**
  * Return a function that returns the next item in a collection each call.
  * @param  {Object|Array} collection The collection to iterate over.
- * @return {Object|undefined}            Object containing next item or undefined if done.
+ * @return {function}            Function that returns the object containing next item or undefined if done.
  */
-function iterable(collection) {
+Please.iterable = function iterable(collection) {
 	let idx = 0;
 	let keys;
 	let length;
@@ -76,135 +69,18 @@ function iterable(collection) {
 			idx: idx++
 		};
 	}
-}
-
-/**
- * Execute action while condition is not met.
- * Like a do { } while() loop. The condition is evaluated after the loop.
- * @function do
- * @param  {any} initial   The initial value, if Function call and use value.
- * @param  {function} condition Condition test, if returns false stop looping.
- * @param  {function} action    Action to execute. Results passed to condition and next aciton.
- * @return {Promise}           Resolves when condition met.
- */
-function _do(initial, condition, action) {
-	if(arguments.length === 1) {
-		// Supplying the action function.
-		action = initial;
-		condition = (value, idx) => {
-			// NOTE: Must skip first condition check or it will stop immediatly.
-			return !!(idx === 0 ? true : value)
-		};
-		initial = undefined;
-	} else if(arguments.length === 2) {
-		// Supplying initial value and action functions.
-		action = condition;
-		condition = (value, idx) => { return !!value };
-	} else {
-		const conditionOriginal = condition;
-		condition = (value, idx) => {
-			if(idx === 0) {
-				return true;
-			}
-			// The first condition check is skipped so adjust the index.
-			return conditionOriginal(value, idx-1)
-		};
-	}
-	return _while(initial, condition, action);
-}
-
-/**
- * Execute action while condition is not met.
- * Like a while() { } loop. The condition is evaluated before the loop.
- * @function while
- * @param  {any} initial   The initial value, if Function call and use value.
- * @param  {function} condition Condition test, if returns false stop looping.
- * @param  {function} action    Action to execute. Results passed to condition and next aciton.
- * @return {Promise}           Resolves when condition met.
- */
-function _while(initial, condition, action) {
-	if(arguments.length === 1) {
-		// Supplying the action function.
-		action = initial;
-		condition = (value, idx) => {
-			// NOTE: Must skip first condition check or it will stop immediatly.
-			return !!(idx === 0 ? true : value)
-		};
-		initial = undefined;
-	} else if(arguments.length === 2) {
-		// Supplying initial value and action functions.
-		action = condition;
-		condition = (value, idx) => { return !!value };
-	}
-	function tick(value, idx, resolve, reject) {
-		Promise.resolve(condition(value, idx))
-			.then(result => {
-				if(result) {
-					Promise.resolve(action(value, idx))
-						.then((result) => {
-							global.setImmediate(() => {
-								tick(result, idx+1, resolve, reject);
-							});
-							return null;
-						}).catch(reject);
-				} else {
-					resolve(value);
-				}
-				return null;
-			}).catch(reject);
-	};
-	return new Promise((resolve, reject) => {
-		Promise.resolve(isFunction(initial) ? initial() : initial)
-			.then(value => {
-				tick(value, 0, resolve, reject);
-				return null;
-			}).catch(reject);
-		return null;
-	});
 };
 
 /**
- * The find method returns a value in the collection, if an element in
- * the collection satisfies the provided testing function. Otherwise undefined is returned.
- * Similar to Array.find.
- * REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
- * @param  {Array|Object} collection      Collection to search.
- * @param  {function} condition Condition test function. Should return true if match, otherwise false.
- * @return {Promise}           Resolves when found or end of collection is reached.
- */
-function find(collection, condition) {
-	const next = iterable(collection);
-	return _do(undefined, item => {
-			if(item === STOP) {
-				return false;
-			}
-			return Promise.resolve(condition(item.value, item.key))
-				.then(result => {
-					return !result;
-				});
-		}, () => {
-			const item = next();
-			if(item === undefined) {
-				return STOP;
-			}
-			return Promise.resolve(item.value) // Resolve this, it may be a promise.
-				.then(() => { return item; });
-		}).then(item => {
-			return item === STOP ? undefined : item.value;
-		});
-}
-
-/**
  * The forEach() method executes a provided function once per array element.
- * Similar to Array.forEach.
- * REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+ * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach Similar to Array#forEach.}
  * @param  {Array|Object} collection      Collection to loop over.
  * @param  {function} action    Action to execute.
- * @return {Promise}           Resolves when end of collection is reached.
+ * @return {Promise}           Resolves when end of collection is reached. Resolves to undefined.
  */
-function forEach(collection, action) {
-	const next = iterable(collection);
-	return _while(undefined, item => {
+Please.forEach = function forEach(collection, action) {
+	const next = Please.iterable(collection);
+	return Please.while(undefined, item => {
 			return item !== STOP;
 		}, () => {
 			const item = next();
@@ -215,7 +91,8 @@ function forEach(collection, action) {
 		}).then(() => {
 			return undefined;
 		});
-}
+};
+
 
 /**
  * The callEach() calls each function in an array and resolves any values
@@ -224,10 +101,10 @@ function forEach(collection, action) {
  * @return {Promise}           Resolves when end of collection is reached.
  * Resolves to an array containing the results of each resolved item.
  */
-function callEach(collection) {
-	const next = iterable(collection);
+Please.callEach = function callEach(collection) {
+	const next = Please.iterable(collection);
 	const results = [ ];
-	return _while(undefined, item => {
+	return Please.while(undefined, item => {
 			return item !== STOP;
 		}, () => {
 			const item = next();
@@ -245,21 +122,145 @@ function callEach(collection) {
 		}).then(() => {
 			return results;
 		})
-}
-
-/* Exports. */
-module.exports = {
-	// Library.
-	version,
-	// Iteration.
-	iterable,
-	// Is-type helpers.
-	isPromise,
-	// Looping.
-	forEach,
-	callEach,
-	while: _while,
-	do: _do,
-	// Finding.
-	find
 };
+
+/**
+ * The isPromise method examines a value to determine if it is a Promise.
+ * Does a ducktype check. Use instanceof only an instance check is desired.
+ * @param  {any}  value The value to examine.
+ * @return {boolean}       True if Promise, false if not.
+ */
+Please.isPromise = function isPromise(value) {
+	return !!(
+			value instanceof Promise	// Instance check.
+			|| ( 											// Ducktype.
+				value
+				&& typeof value === 'object'
+				&& typeof value.then === 'function'
+				&& typeof value.catch === 'function'
+			)
+		);
+};
+
+/**
+ * Execute action until condition is met. The condition is evaluated before the first action is run.
+ * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while Similar to a while loop.}
+ * @param  {any} initial   The initial value, if function call and use value.
+ * @param  {function} condition Condition test, if returns false stop looping.
+ * @param  {function} action    Action to execute. Results passed to condition and next aciton.
+ * @return {Promise}           Resolves when condition met.
+ */
+Please.while = function _while(initial, condition, action) {
+	if(arguments.length === 1) {
+		// Supplying the action function.
+		action = initial;
+		condition = (value, idx) => {
+			// NOTE: Must skip first condition check or it will stop immediatly.
+			return !!(idx === 0 ? true : value)
+		};
+		initial = undefined;
+	} else if(arguments.length === 2) {
+		// Supplying initial value and action functions.
+		action = condition;
+		condition = (value, idx) => { return !!value };
+	}
+	function tick(value, idx, resolve, reject) {
+		// NOTE: Does not return Promise on purpose.
+		Promise.resolve(condition(value, idx))
+			.then(result => {
+				if(result) {
+					// NOTE: Does not return Promise on purpose.
+					Promise.resolve(action(value, idx))
+						.then((result) => {
+							global.setImmediate(() => {
+								tick(result, idx+1, resolve, reject);
+							});
+							return null;
+						}).catch(reject);
+				} else {
+					resolve(value);
+				}
+				return null;
+			}).catch(reject);
+	};
+	return new Promise((resolve, reject) => {
+		// NOTE: Does not return Promise on purpose.
+		Promise.resolve(isFunction(initial) ? initial() : initial)
+			.then(value => {
+				tick(value, 0, resolve, reject);
+				return null;
+			}).catch(reject);
+		return null;
+	});
+};
+
+/**
+ * Execute action until condition is met. The condition is evaluated after the first action is run.
+ * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while Similar to a do...while loop.}
+ * @param  {any} initial   The initial value, if function call and use value.
+ * @param  {function} condition Condition test, if returns false stop looping.
+ * @param  {function} action    Action to execute. Results passed to condition and next aciton.
+ * @return {Promise}           Resolves when condition met.
+ */
+Please.do = function _do(initial, condition, action) {
+	if(arguments.length === 1) {
+		// Supplying the action function.
+		action = initial;
+		condition = (value, idx) => {
+			// NOTE: Must skip first condition check or it will stop immediatly.
+			return !!(idx === 0 ? true : value)
+		};
+		initial = undefined;
+	} else if(arguments.length === 2) {
+		// Supplying initial value and action functions.
+		action = condition;
+		condition = (value, idx) => { return !!value };
+	} else {
+		// Supplying all three parameters.
+		const conditionOriginal = condition;
+		condition = (value, idx) => {
+			if(idx === 0) {
+				return true;
+			}
+			// The first condition check is skipped so adjust the index.
+			return conditionOriginal(value, idx-1)
+		};
+	}
+	return Please.while(initial, condition, action);
+};
+
+/**
+ * The find method returns a value in the collection, if an element in
+ * the collection satisfies the provided testing function. Otherwise undefined is returned.
+ * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find Similar to Array#find.}
+ * @param  {Array|Object} collection      Collection to search.
+ * @param  {function} condition Condition test function. Should return true if match, otherwise false.
+ * @return {Promise}           Resolves to the found value when found or undefined when no match was found.
+ */
+Please.find = function find(collection, condition) {
+	const next = Please.iterable(collection);
+	return Please.do(undefined, item => {
+			if(item === STOP) {
+				return false;
+			}
+			return Promise.resolve(condition(item.value, item.key))
+				.then(result => {
+					return !result;
+				});
+		}, () => {
+			const item = next();
+			if(item === undefined) {
+				return STOP;
+			}
+			return Promise.resolve(item.value) // Resolve this, it may be a promise.
+				.then(() => { return item; });
+		}).then(item => {
+			return item === STOP ? undefined : item.value;
+		});
+};
+
+/**
+ * Exports.
+ * @type {Object}
+ */
+module.exports = Please;

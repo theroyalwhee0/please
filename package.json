@@ -6,12 +6,13 @@
   "author": "Adam Mill <theroyalwhee0@gmail.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "mocha ${npm_package_config_testpath}",
-    "test-watch": "mocha ${npm_package_config_testpath} --bail --watch --reporter dot",
-		"gen-docs": "jsdoc index.js --destination docs && echo 'OK'"
+    "test": "mocha ${npm_package_config_testPath}",
+    "test-watch": "mocha ${npm_package_config_testPath} --bail --watch --reporter dot",
+		"gen-docs": "jsdoc ${npm_package_main} --destination ${npm_package_config_docsPath}"
   },
   "config": {
-    "testpath": "test/**/*Spec.js"
+    "testPath": "test/**/*Spec.js",
+		"docsPath": "docs/"
   },
   "keywords": [
     "promise"

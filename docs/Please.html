@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Namespace: Please</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Namespace: Please</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2></h2>
+        <h2>Please</h2>
         
     
 </header>
@@ -36,6 +36,8 @@
 <article>
     <div class="container-overview">
     
+        
+            <div class="description">The Please namespace.</div>
         
 
         
@@ -68,6 +70,11 @@
     
 
     
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line27">line 27</a>
+    </li></ul></dd>
+    
 
     
 
@@ -92,6 +99,82 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".version"><span class="type-signature">(static) </span>version<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    The version of the library.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line37">line 37</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -101,7 +184,7 @@
 
     
 
-    <h4 class="name" id="callEach"><span class="type-signature"></span>callEach<span class="signature">(collection)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".callEach"><span class="type-signature">(static) </span>callEach<span class="signature">(collection)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -205,7 +288,7 @@ returned. Items that are not functions are resolved.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line227">line 227</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line104">line 104</a>
     </li></ul></dd>
     
 
@@ -259,15 +342,15 @@ Resolves to an array containing the results of each resolved item.
 
     
 
-    <h4 class="name" id="do"><span class="type-signature"></span>do<span class="signature">(initial, condition, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".do"><span class="type-signature">(static) </span>do<span class="signature">(initial, condition, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
 
 
 <div class="description">
-    Execute action while condition is not met.
-Like a do { } while() loop. The condition is evaluated after the loop.
+    Execute action until condition is met. The condition is evaluated after the first action is run.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while">Similar to a do...while loop.</a>
 </div>
 
 
@@ -319,7 +402,7 @@ Like a do { } while() loop. The condition is evaluated after the loop.
 
             
 
-            <td class="description last">The initial value, if Function call and use value.</td>
+            <td class="description last">The initial value, if function call and use value.</td>
         </tr>
 
     
@@ -406,7 +489,7 @@ Like a do { } while() loop. The condition is evaluated after the loop.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line81">line 81</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line205">line 205</a>
     </li></ul></dd>
     
 
@@ -459,7 +542,7 @@ Like a do { } while() loop. The condition is evaluated after the loop.
 
     
 
-    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">(collection, condition)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".find"><span class="type-signature">(static) </span>find<span class="signature">(collection, condition)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -468,8 +551,7 @@ Like a do { } while() loop. The condition is evaluated after the loop.
 <div class="description">
     The find method returns a value in the collection, if an element in
 the collection satisfies the provided testing function. Otherwise undefined is returned.
-Similar to Array.find.
-REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">Similar to Array#find.</a>
 </div>
 
 
@@ -588,7 +670,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line175">line 175</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line240">line 240</a>
     </li></ul></dd>
     
 
@@ -615,7 +697,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
         
 <div class="param-desc">
-    Resolves when found or end of collection is reached.
+    Resolves to the found value when found or undefined when no match was found.
 </div>
 
 
@@ -641,7 +723,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
     
 
-    <h4 class="name" id="forEach"><span class="type-signature"></span>forEach<span class="signature">(collection, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".forEach"><span class="type-signature">(static) </span>forEach<span class="signature">(collection, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
@@ -649,8 +731,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
 <div class="description">
     The forEach() method executes a provided function once per array element.
-Similar to Array.forEach.
-REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Similar to Array#forEach.</a>
 </div>
 
 
@@ -769,7 +850,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line205">line 205</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -796,7 +877,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
         
 <div class="param-desc">
-    Resolves when end of collection is reached.
+    Resolves when end of collection is reached. Resolves to undefined.
 </div>
 
 
@@ -822,14 +903,15 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
     
 
-    <h4 class="name" id="isPromise"><span class="type-signature"></span>isPromise<span class="signature">(value)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id=".isPromise"><span class="type-signature">(static) </span>isPromise<span class="signature">(value)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 
     
 
 
 
 <div class="description">
-    Is the value a promise?
+    The isPromise method examines a value to determine if it is a Promise.
+Does a ducktype check. Use instanceof only an instance check is desired.
 </div>
 
 
@@ -881,7 +963,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
             
 
-            <td class="description last">The value to check.</td>
+            <td class="description last">The value to examine.</td>
         </tr>
 
     
@@ -922,7 +1004,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line34">line 34</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line133">line 133</a>
     </li></ul></dd>
     
 
@@ -949,7 +1031,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
         
 <div class="param-desc">
-    True if promise, false if not.
+    True if Promise, false if not.
 </div>
 
 
@@ -975,7 +1057,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
     
 
-    <h4 class="name" id="iterable"><span class="type-signature"></span>iterable<span class="signature">(collection)</span><span class="type-signature"> &rarr; {Object|undefined}</span></h4>
+    <h4 class="name" id=".iterable"><span class="type-signature">(static) </span>iterable<span class="signature">(collection)</span><span class="type-signature"> &rarr; {function}</span></h4>
 
     
 
@@ -1078,7 +1160,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line51">line 51</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -1105,7 +1187,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
         
 <div class="param-desc">
-    Object containing next item or undefined if done.
+    Function that returns the object containing next item or undefined if done.
 </div>
 
 
@@ -1116,10 +1198,7 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">function</span>
 
 
     </dd>
@@ -1134,15 +1213,15 @@ REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Ob
 
     
 
-    <h4 class="name" id="while"><span class="type-signature"></span>while<span class="signature">(initial, condition, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+    <h4 class="name" id=".while"><span class="type-signature">(static) </span>while<span class="signature">(initial, condition, action)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
 
     
 
 
 
 <div class="description">
-    Execute action while condition is not met.
-Like a while() { } loop. The condition is evaluated before the loop.
+    Execute action until condition is met. The condition is evaluated before the first action is run.
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while">Similar to a while loop.</a>
 </div>
 
 
@@ -1194,7 +1273,7 @@ Like a while() { } loop. The condition is evaluated before the loop.
 
             
 
-            <td class="description last">The initial value, if Function call and use value.</td>
+            <td class="description last">The initial value, if function call and use value.</td>
         </tr>
 
     
@@ -1281,7 +1360,7 @@ Like a while() { } loop. The condition is evaluated before the loop.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line116">line 116</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line153">line 153</a>
     </li></ul></dd>
     
 
@@ -1345,13 +1424,13 @@ Like a while() { } loop. The condition is evaluated before the loop.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#callEach">callEach</a></li><li><a href="global.html#do">do</a></li><li><a href="global.html#find">find</a></li><li><a href="global.html#forEach">forEach</a></li><li><a href="global.html#isPromise">isPromise</a></li><li><a href="global.html#iterable">iterable</a></li><li><a href="global.html#while">while</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Please.html">Please</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Mon Sep 12 2016 17:56:48 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a> on Mon Sep 12 2016 21:36:09 GMT-0400 (EDT)
 </footer>
 
 <script> prettyPrint(); </script>
