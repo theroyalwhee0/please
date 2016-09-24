@@ -34,7 +34,7 @@ const Please = { };
  * The version of the library.
  * @type {string}
  */
-Please.version = '0.0.2';
+Please.version = '0.0.3';
 
 /**
  * Return a function that returns the next item in a collection each call.
@@ -59,7 +59,7 @@ Please.iterable = function iterable(collection) {
 			return undefined;
 		}
 		const key =  keys ? keys[idx] : idx;
-		const value = keys ? collection[key] : collection[idx];
+		const value = collection[key];
 		return {
 			// Collection.
 			length,
