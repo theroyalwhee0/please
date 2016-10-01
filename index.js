@@ -1,6 +1,6 @@
 /**
  * @file Please, A Promise Helper Library.
- * @version 0.0.2
+ * @version 0.0.3
  * @author Adam Mill
  * @copyright Copyright 2016 Adam Mill
  * @license Apache-2.0
@@ -41,7 +41,7 @@ Please.version = '0.0.3';
  * @param  {Object|Array} collection The collection to iterate over.
  * @return {function}            Function that returns the object containing next item or undefined if done.
  */
-Please.iterable = function iterable(collection) {
+Please.takable = function takable(collection) {
 	let idx = 0;
 	let keys;
 	let length;
@@ -54,7 +54,7 @@ Please.iterable = function iterable(collection) {
 		const msg = (''+collection).substring(0,20);
 		throw new Error(`Can not iterate over "${msg}" (${typeof collection})`);
 	}
-	return function iterable_() {
+	return function takeNext() {
 		if(idx >= length) {
 			return undefined;
 		}
@@ -79,15 +79,16 @@ Please.iterable = function iterable(collection) {
  * @return {Promise}           Resolves when end of collection is reached. Resolves to undefined.
  */
 Please.forEach = function forEach(collection, action) {
-	const next = Please.iterable(collection);
+	const takeNext = Please.takable(collection);
 	return Please.while(undefined, item => {
 			return item !== STOP;
 		}, () => {
-			const item = next();
+			const item = takeNext();
 			if(item === undefined) {
 				return STOP;
 			}
-			return Promise.resolve(action(item.value, item.key));
+			const value = action(item.value, item.key);
+			return Promise.resolve(value);
 		}).then(() => {
 			return undefined;
 		});
@@ -102,12 +103,12 @@ Please.forEach = function forEach(collection, action) {
  * Resolves to an array containing the results of each resolved item.
  */
 Please.callEach = function callEach(collection) {
-	const next = Please.iterable(collection);
+	const takeNext = Please.takable(collection);
 	const results = [ ];
 	return Please.while(undefined, item => {
 			return item !== STOP;
 		}, () => {
-			const item = next();
+			const item = takeNext();
 			if(item === undefined) {
 				return STOP;
 			}
@@ -117,7 +118,7 @@ Please.callEach = function callEach(collection) {
 			return Promise.resolve(value)
 				.then(value => {
 					results.push(value);
-					return value;
+					return undefined;
 				});
 		}).then(() => {
 			return results;
@@ -152,7 +153,7 @@ Please.isPromise = function isPromise(value) {
  */
 Please.while = function _while(initial, condition, action) {
 	if(arguments.length === 1) {
-		// Supplying the action function.
+		// Only supplying the action function.
 		action = initial;
 		condition = (value, idx) => {
 			// NOTE: Must skip first condition check or it will stop immediatly.
@@ -160,7 +161,7 @@ Please.while = function _while(initial, condition, action) {
 		};
 		initial = undefined;
 	} else if(arguments.length === 2) {
-		// Supplying initial value and action functions.
+		// Only supplying initial value and action functions.
 		action = condition;
 		condition = (value, idx) => { return !!value };
 	}
@@ -204,7 +205,7 @@ Please.while = function _while(initial, condition, action) {
  */
 Please.do = function _do(initial, condition, action) {
 	if(arguments.length === 1) {
-		// Supplying the action function.
+		// Only supplying the action function.
 		action = initial;
 		condition = (value, idx) => {
 			// NOTE: Must skip first condition check or it will stop immediatly.
@@ -212,7 +213,7 @@ Please.do = function _do(initial, condition, action) {
 		};
 		initial = undefined;
 	} else if(arguments.length === 2) {
-		// Supplying initial value and action functions.
+		// Only supplying initial value and action functions.
 		action = condition;
 		condition = (value, idx) => { return !!value };
 	} else {
@@ -238,7 +239,7 @@ Please.do = function _do(initial, condition, action) {
  * @return {Promise}           Resolves to the found value when found or undefined when no match was found.
  */
 Please.find = function find(collection, condition) {
-	const next = Please.iterable(collection);
+	const takeNext = Please.takable(collection);
 	return Please.do(undefined, item => {
 			if(item === STOP) {
 				return false;
@@ -248,7 +249,7 @@ Please.find = function find(collection, condition) {
 					return !result;
 				});
 		}, () => {
-			const item = next();
+			const item = takeNext();
 			if(item === undefined) {
 				return STOP;
 			}
