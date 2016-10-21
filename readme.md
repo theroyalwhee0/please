@@ -18,6 +18,11 @@ At the moment, the only examples are the [tests](https://github.com/theroyalwhee
 - npm test
 - npm run test-watch
 
+# History
+ - v0.0.3 Readme/Package changes. Minor bug fixes.
+ - v0.0.2 Bug fixes.
+ - v0.0.1 Initial release.
+
 # Legal & License
 Copyright 2016 Adam Mill
 
