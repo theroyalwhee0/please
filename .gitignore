@@ -1,10 +1,1 @@
-# Node files.
 node_modules/
-
-# Mercurial files.
-.hg/
-.hgignore
-.hgsigs
-.hgsub
-.hgsubstate
-.hgtags

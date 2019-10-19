@@ -1,19 +1,10 @@
 {
   "name": "@theroyalwhee0/please",
-  "version": "0.0.3",
+  "version": "2.0.0",
   "description": "A Promise helper library.",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Adam Mill <theroyalwhee0@gmail.com>",
   "license": "Apache-2.0",
-  "scripts": {
-    "test": "mocha ${npm_package_config_testPath}",
-    "test-watch": "mocha ${npm_package_config_testPath} --bail --watch --reporter dot",
-		"gen-docs": "jsdoc ${npm_package_main} --destination ${npm_package_config_docsPath}"
-  },
-  "config": {
-    "testPath": "test/**/*Spec.js",
-		"docsPath": "docs/"
-  },
   "keywords": [
     "promise"
   ],
@@ -30,8 +21,15 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "expect.js": "^0.3.1",
-    "jsdoc": "^3.4.1",
-    "mocha": "^3.0.2"
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "mocha": "6.2.2",
+    "sinon": "7.5.0"
+  },
+  "scripts": {
+    "test": "mocha --sort --recursive --check-leaks",
+    "test-watch": "mocha --watch --reporter=dot --sort --recursive --check-leaks",
+    "test-watch-spec": "mocha --watch --reporter=spec --sort --recursive --check-leaks",
+    "lint": "eslint src/**/*.js* ${FIX} && eslint test/**/*.js ${FIX}"
   }
 }
