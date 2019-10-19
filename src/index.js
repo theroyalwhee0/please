@@ -8,6 +8,11 @@
 'use strict';
 
 /**
+ * Imports.
+ */
+const setTimeoutLib=setTimeout;
+
+/**
  * The isPromise method examines a value to determine if it is a Promise.
  * Does a ducktype check. Use instanceof only an instance check is desired.
  * @param  {any}  value The value to examine.
@@ -42,6 +47,15 @@ async function allProps(promises) {
   }, {});
 }
 
+/**
+ * Delay for given ms.
+ */
+function delay(duration=1000, options={}) {
+  const { setTimeout=setTimeoutLib } = options;
+  return new Promise((resolve) => {
+    setTimeout(resolve, duration);
+  });
+}
 
 /**
  * Exports.
@@ -50,4 +64,5 @@ async function allProps(promises) {
 module.exports = {
   isPromise,
   allProps,
+  delay,
 };
