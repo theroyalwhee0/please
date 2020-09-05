@@ -1,6 +1,6 @@
 /**
  * @file Please, A Promise Helper Library.
- * @version 2.0.0
+ * @version 2.0.2
  * @author Adam Mill
  * @copyright Copyright 2019 Adam Mill
  * @license Apache-2.0

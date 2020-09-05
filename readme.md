@@ -16,11 +16,13 @@ At the moment, the only examples are the [tests](https://github.com/theroyalwhee
 - npm run test-watch
 
 ## History
- - 2.0.0 Initial release of v2 library.
+- 2.0.2 Bump dev depends.
+- 2.0.1 Add delay().
+- 2.0.0 Initial release of v2 library.
 
  Previous versions are a different unsupported library that shares the same name.
 
 ## Legal & License
-Copyright 2019 Adam Mill
+Copyright 2019-2020 Adam Mill
 
 The library is released under Apache 2 license.  See LICENSE for more details.

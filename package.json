@@ -1,6 +1,6 @@
 {
   "name": "@theroyalwhee0/please",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Promise helper library.",
   "main": "src/index.js",
   "author": "Adam Mill <theroyalwhee0@gmail.com>",
@@ -23,8 +23,8 @@
   "devDependencies": {
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
-    "mocha": "6.2.2",
-    "sinon": "7.5.0"
+    "mocha": "8.1.3",
+    "sinon": "9.0.3"
   },
   "scripts": {
     "test": "mocha --sort --recursive --check-leaks",
