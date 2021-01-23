@@ -5,11 +5,8 @@
 /**
  * Imports.
  */
-const chai = require('chai');
-const chaiAsPromised = require('chai-as-promised');
+const { describe, it, expect } = require('./testing');
 const { allProps } = require('../src');
-chai.use(chaiAsPromised);
-const { expect } = chai;
 
 /**
  * Test.

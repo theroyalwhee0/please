@@ -1,6 +1,6 @@
 {
   "name": "@theroyalwhee0/please",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A Promise helper library.",
   "main": "src/index.js",
   "author": "Adam Mill <theroyalwhee0@gmail.com>",
@@ -27,9 +27,9 @@
     "sinon": "9.0.3"
   },
   "scripts": {
-    "test": "mocha --sort --recursive --check-leaks",
+    "test": "mocha --sort --bail --recursive --check-leaks",
     "test-watch": "mocha --watch --reporter=dot --sort --recursive --check-leaks",
     "test-watch-spec": "mocha --watch --reporter=spec --sort --recursive --check-leaks",
-    "lint": "eslint src/**/*.js test/**/*.js"
+    "lint": "eslint src/ test/"
   }
 }

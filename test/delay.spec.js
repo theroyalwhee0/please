@@ -5,12 +5,8 @@
 /**
  * Imports.
  */
-const chai = require('chai');
-const { spy } = require('sinon');
-const chaiAsPromised = require('chai-as-promised');
+const { spy, describe, it, expect } = require('./testing');
 const { delay } = require('../src');
-chai.use(chaiAsPromised);
-const { expect } = chai;
 
 /**
  * Tests.
