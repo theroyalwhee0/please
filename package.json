@@ -3,7 +3,7 @@
   "version": "2.0.3",
   "description": "A Promise helper library.",
   "main": "src/index.js",
-  "author": "Adam Mill <theroyalwhee0@gmail.com>",
+  "author": "Adam Mill <hismajesty@theroyalwhee.com>",
   "license": "Apache-2.0",
   "keywords": [
     "promise"

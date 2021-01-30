@@ -40,4 +40,4 @@ Previous versions are a different unsupported library that shares the same name.
 ## Legal & License
 Copyright 2019-2021 Adam Mill
 
-The library is released under Apache 2 license.  See LICENSE for more details.
+This library is released under Apache 2 license. See [LICENSE](https://github.com/theroyalwhee0/please/blob/master/LICENSE) for more details.
