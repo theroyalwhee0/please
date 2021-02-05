@@ -1,13 +1,14 @@
 /**
  * @file Please, A Promise Helper Library.
- * @version 2.0.3
- * @author Adam Mill
- * @copyright Copyright 2019 Adam Mill
+ * @version v2.0.4
+ * @author Adam Mill <hismajesty@theroyalwhee.com>
+ * @copyright Copyright 2019-2021 Adam Mill
  * @license Apache-2.0
  */
 
 /**
  * Imports.
+ * @ignore
  */
 const setTimeoutLib=setTimeout;
 
@@ -52,7 +53,7 @@ async function allProps(promises) {
  * Delay for given ms.
  * @param {number} duration The duration in ms.
  * @param {object} options Options. Optional.
- * @returns {Promise<>} Resolves after delay.
+ * @returns {Promise<undefined>} Resolves after delay.
  */
 function delay(duration=1000, options={}) {
   const { setTimeout=setTimeoutLib } = options;
@@ -64,13 +65,13 @@ function delay(duration=1000, options={}) {
 /**
  * Catch rejections and resolve to a given value.
  * @param {Promise} promise The promise to operate on.
- * @param {any} value The value to resolve to if a rejection occurs.
- * @returns {Promise<any>} The value.
+ * @param {any} rejectValue The value to resolve to if a rejection occurs.
+ * @returns {Promise<any>} The resolved value or the reject value if rejected.
  */
-function catchAs(promise, value) {
+function catchAs(promise, rejectValue) {
   return Promise.resolve(promise)
     .catch(() => {
-      return value;
+      return rejectValue;
     });
 }
 
