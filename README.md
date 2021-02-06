@@ -10,8 +10,8 @@ npm install @theroyalwhee0/please
 yarn add @theroyalwhee0/please
 
 
-## Usage
-At the moment, the only examples are the [tests](https://github.com/theroyalwhee0/please/tree/master/test).
+## Documentation
+[API Documentation](https://theroyalwhee0.github.io/please/)
 
 
 ## Testing
