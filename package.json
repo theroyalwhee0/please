@@ -32,7 +32,6 @@
   "scripts": {
     "test": "mocha --sort --bail --recursive --check-leaks",
     "test-watch": "mocha --watch --reporter=dot --sort --recursive --check-leaks",
-    "test-watch-spec": "mocha --watch --reporter=spec --sort --recursive --check-leaks",
     "lint": "eslint src/ test/",
     "docs": "jsdoc --pedantic --readme ./README.md --recurse --destination docs/ src/",
     "dryrun": "npm test && npm run lint && npm run docs && npm audit && npm publish --dry-run"
