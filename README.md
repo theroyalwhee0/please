@@ -20,6 +20,9 @@ yarn add @theroyalwhee0/please
 
 
 ## History
+- v2.0.4 - 2021-06-11
+  - Bump depends for security.
+  - Fix missing eslint dev depends.
 - v2.0.3 - 2021-01-23
   - Add Please.catchAs().
 - v2.0.2

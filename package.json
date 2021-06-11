@@ -1,6 +1,6 @@
 {
   "name": "@theroyalwhee0/please",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A Promise helper library.",
   "main": "src/index.js",
   "author": "Adam Mill <hismajesty@theroyalwhee.com> (https://www.theroyalwhee.com)",
@@ -24,7 +24,8 @@
   "devDependencies": {
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
-    "jsdoc": "3.6.6",
+    "eslint": "7.28.0",
+    "jsdoc": "3.6.7",
     "mocha": "8.3.2",
     "sinon": "9.0.3"
   },
