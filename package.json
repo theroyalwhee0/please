@@ -33,7 +33,8 @@
     "test": "mocha --sort --bail --recursive --check-leaks",
     "test-watch": "mocha --watch --reporter=dot --sort --recursive --check-leaks",
     "lint": "eslint src/ test/",
-    "docs": "jsdoc --pedantic --readme ./README.md --recurse --destination docs/ src/",
+    "#docs": "jsdoc --pedantic --readme ./README.md --recurse --destination docs/ src/",
+    "docs": "jsdoc -c .jsdoc.conf.json",
     "dryrun": "npm test && npm run lint && npm run docs && npm audit && npm publish --dry-run"
   }
 }
