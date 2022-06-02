@@ -3,11 +3,11 @@ Please is a Javascript Promise helper library with no dependencies. It is meant 
 
 
 ## Installation
-npm install @theroyalwhee0/please
+`npm install @theroyalwhee0/please`
 
 *or*
 
-yarn add @theroyalwhee0/please
+`yarn add @theroyalwhee0/please`
 
 
 ## Documentation
@@ -20,6 +20,8 @@ yarn add @theroyalwhee0/please
 
 
 ## History
+- v2.0.5 - 2022-06-02
+  - Bump depends for security.
 - v2.0.4 - 2021-06-11
   - Bump depends for security.
   - Fix missing eslint dev depends.
@@ -41,6 +43,6 @@ Previous versions are a different unsupported library that shares the same name.
 
 
 ## Legal & License
-Copyright 2019-2021 Adam Mill
+Copyright 2019-2022 Adam Mill
 
 This library is released under Apache 2 license. See [LICENSE](https://github.com/theroyalwhee0/please/blob/master/LICENSE) for more details.

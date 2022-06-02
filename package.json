@@ -1,6 +1,6 @@
 {
   "name": "@theroyalwhee0/please",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A Promise helper library.",
   "main": "src/index.js",
   "author": "Adam Mill <hismajesty@theroyalwhee.com> (https://www.theroyalwhee.com)",
@@ -25,15 +25,14 @@
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "eslint": "7.28.0",
-    "jsdoc": "3.6.7",
-    "mocha": "8.3.2",
+    "jsdoc": "3.6.10",
+    "mocha": "10.0.0",
     "sinon": "9.0.3"
   },
   "scripts": {
     "test": "mocha --sort --bail --recursive --check-leaks",
     "test-watch": "mocha --watch --reporter=dot --sort --recursive --check-leaks",
     "lint": "eslint src/ test/",
-    "#docs": "jsdoc --pedantic --readme ./README.md --recurse --destination docs/ src/",
     "docs": "jsdoc -c .jsdoc.conf.json",
     "dryrun": "npm test && npm run lint && npm run docs && npm audit && npm publish --dry-run"
   }
